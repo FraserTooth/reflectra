@@ -1,0 +1,10 @@
+{
+  "name": "smart_mirror_app",
+  "version": "0.0.1",
+  "description": "An App for a Smart Mirror",
+  "main": "index.js",
+  "repository": "https://github.com/FraserTooth/smart_mirror_app.git",
+  "author": "Fraser Tooth <frasertooth@gmail.com>",
+  "license": "MIT",
+  "private": false
+}
