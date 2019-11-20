@@ -2,7 +2,7 @@
   <div id="newItem">
     <v-card class="mx-auto">
       <v-card-text>
-        <div>2019-11-19</div>
+        <div>{{ news.at_published }}</div>
         <p class="display-1 text--primary">{{ news.title }}</p>
         <div class="text--primary">{{ news.text }}</div>
       </v-card-text>
