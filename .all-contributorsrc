@@ -1,0 +1,23 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "chiched",
+      "name": "David Chiche",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/54376843?v=4",
+      "profile": "https://github.com/chiched",
+      "contributions": [
+        "code"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "projectName": "smart_mirror_app",
+  "projectOwner": "FraserTooth",
+  "repoType": "github",
+  "repoHost": "https://github.com"
+}
