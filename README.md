@@ -21,6 +21,14 @@ yarn build
 yarn lint
 ```
 
+### Environment
+Please add a file named ```.env``` to the root of your project.
+
+In order to run the project properly, please add the following to this file:
+```bash
+RAPID_API_KEY=#Your Rakuten Rapid API Key
+```
+
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
 
