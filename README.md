@@ -27,6 +27,7 @@ Please add a file named ```.env``` to the root of your project.
 In order to run the project properly, please add the following to this file:
 ```bash
 RAPID_API_KEY=#Your Rakuten Rapid API Key
+DB_CONNECTION=#Your MongoDB Cloud Key
 ```
 
 ### Customize configuration
