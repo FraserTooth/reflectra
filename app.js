@@ -1,9 +1,23 @@
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
+const morgan = require("morgan");
 const Person = require("./models/person.js");
+const path = require("path");
 const bodyParser = require("body-parser");
 require("dotenv").config();
+
+const PORT = process.env.PORT || 9000;
+
+// Setup Logger
+app.use(
+  morgan(
+    ':remote-addr - :remote-user [:date[clf]] ":method :url HTTP/:http-version" :status :res[content-length] :response-time ms'
+  )
+);
+
+// Serve static assets
+app.use(express.static(path.resolve(__dirname, ".", "dist")));
 
 app.use(bodyParser.json());
 // Connection URL
@@ -12,7 +26,7 @@ mongoose.connect(process.env.DB_CONNECTION, { useNewUrlParser: true }, () =>
 );
 
 //get all post
-app.get("/", async (req, res) => {
+app.get("/api/", async (req, res) => {
   try {
     const person = await Person.find();
     res.json(person);
@@ -22,7 +36,7 @@ app.get("/", async (req, res) => {
 });
 
 //specific post
-app.get("/:personId", async (req, res) => {
+app.get("/api/:personId", async (req, res) => {
   try {
     const person = await Person.findById(req.params.personId);
     res.json(person);
@@ -32,7 +46,7 @@ app.get("/:personId", async (req, res) => {
 });
 
 //add post
-app.post("/", async (req, res) => {
+app.post("/api/", async (req, res) => {
   const person = new Person({
     name: req.body.name,
     preference: req.body.preference,
@@ -47,4 +61,9 @@ app.post("/", async (req, res) => {
   }
 });
 
-app.listen(3000);
+// Always return the main index.html, since we are developing a single page application
+app.get("*", (req, res) => {
+  res.sendFile(path.resolve(__dirname, ".", "dist", "index.html"));
+});
+
+app.listen(PORT, () => console.log(`App listening on port ${PORT}!`));
