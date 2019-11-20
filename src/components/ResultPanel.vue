@@ -1,14 +1,17 @@
 <template>
   <div id="resultPanel">
-    <v-container>
-      <!-- Login Name -->
-      <p>{{ username }}</p>
+    <!-- Login Name -->
+    <!-- <p>{{ username }}</p> -->
 
-      <!-- News -->
-      <newsList />
+    <v-row>
+      <v-col cols="3">
+        <!-- News -->
+        <h1>News</h1>
+        <newsList />
+      </v-col>
 
       <!-- The other components -->
-    </v-container>
+    </v-row>
   </div>
 </template>
 
