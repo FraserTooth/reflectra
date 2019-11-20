@@ -1,0 +1,41 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "chiched",
+      "name": "David Chiche",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/54376843?v=4",
+      "profile": "https://github.com/chiched",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "FraserTooth",
+      "name": "Fraser Tooth",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/25011388?v=4",
+      "profile": "https://github.com/FraserTooth",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "eugenekim000",
+      "name": "eugenekim000",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/21001242?v=4",
+      "profile": "https://github.com/eugenekim000",
+      "contributions": [
+        "code"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "projectName": "smart_mirror_app",
+  "projectOwner": "FraserTooth",
+  "repoType": "github",
+  "repoHost": "https://github.com"
+}
