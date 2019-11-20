@@ -19,11 +19,6 @@ app.use(
 // Serve static assets
 app.use(express.static(path.resolve(__dirname, ".", "dist")));
 
-// Always return the main index.html, since we are developing a single page application
-app.get("*", (req, res) => {
-  res.sendFile(path.resolve(__dirname, ".", "dist", "index.html"));
-});
-
 app.use(bodyParser.json());
 // Connection URL
 mongoose.connect(process.env.DB_CONNECTION, { useNewUrlParser: true }, () =>
@@ -64,6 +59,11 @@ app.post("/api/", async (req, res) => {
   } catch (err) {
     res.json({ err });
   }
+});
+
+// Always return the main index.html, since we are developing a single page application
+app.get("*", (req, res) => {
+  res.sendFile(path.resolve(__dirname, ".", "dist", "index.html"));
 });
 
 app.listen(PORT, () => console.log(`App listening on port ${PORT}!`));
