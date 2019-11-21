@@ -366,8 +366,8 @@ export default new Vuex.Store({
         });
 
         if (response.result === true) {
-          store.commit("setUsername", response.data.name);
-          store.commit("updateNewslist", response.data.value);
+          store.commit("setUsername", response.name);
+          store.commit("updateNewslist", response.value);
           store.commit("setLoginStatus", "loggedIn");
           store.commit("setMatchError", false);
           store.commit("changeView", "resultsPanel");
@@ -380,8 +380,6 @@ export default new Vuex.Store({
     },
   },
   getters: {
-    test(state) {
-      return state.test;
-    },
+
   },
 });
