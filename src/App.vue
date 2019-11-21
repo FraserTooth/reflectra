@@ -3,26 +3,38 @@
     <v-app>
       <v-app-bar app color="black" dark>
         <v-toolbar-title>
-          <div @click="dummyLogin">
-            <b>Smart Mirror App</b>
+          <div @click="login">
+            <b>Reflectra</b>
           </div>
         </v-toolbar-title>
 
         <v-spacer></v-spacer>
 
-        <v-btn
-          href="https://github.com/vuetifyjs/vuetify/releases/latest"
-          target="_blank"
-          text
-        >
+        <v-btn v-if="$store.state.currentView === 'resultsPanel'" text>
           <span class="mr-2">Settings</span>
           <v-icon>fas fa-cog</v-icon>
+        </v-btn>
+        <v-btn
+          v-if="$store.state.currentView === 'resultsPanel'"
+          text
+          @click="logout"
+        >
+          <span class="mr-2">LogOut</span>
+          <v-icon>fas fa-sign-out-alt</v-icon>
         </v-btn>
       </v-app-bar>
 
       <v-content>
-        <loginPanel v-if="username === ''" />
-        <resultPanel v-if="username !== ''" />
+        <transition name="fade">
+          <loginPanel v-if="$store.state.currentView === 'loginPanel'" />
+          <resultPanel v-if="$store.state.currentView === 'resultsPanel'" />
+          <!-- TODO: Error Massage -->
+          <v-container>
+            <v-alert type="error" v-if="$store.state.matchError">
+              ERROR!! Your face does not register...
+            </v-alert>
+          </v-container>
+        </transition>
       </v-content>
     </v-app>
   </div>
@@ -41,11 +53,16 @@ export default {
   },
 
   data: () => ({
-    username: "",
+    loginStatus: false,
   }),
   methods: {
-    dummyLogin() {
-      this.username = "TEST";
+    login() {
+      // this.loginStatus = true;
+      this.$store.commit("changeView", "resultsPanel");
+    },
+    logout() {
+      // this.loginStatus = false;
+      this.$store.commit("changeView", "loginPanel");
     },
   },
 };
@@ -61,5 +78,11 @@ export default {
 <style scoped>
 canvas {
   /* display: none; */
+}
+.fade-enter-active {
+  transition: opacity 2s;
+}
+.fade-enter {
+  opacity: 0;
 }
 </style>

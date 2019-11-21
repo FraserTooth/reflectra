@@ -1,15 +1,15 @@
 <template>
   <div>
-    <!-- <video
+    <video
       ref="videoStreamWide"
       id="videoStreamWide"
       muted="true"
       width="100%"
       autoplay
       playsinline
-    ></video> -->
+    ></video>
     <v-layout align-center justify-center>
-      <v-btn @click="capture" class="mt-12">Login</v-btn>
+      <v-btn @click="capture">Login</v-btn>
     </v-layout>
     <video
       ref="videoStream"
@@ -36,7 +36,7 @@ export default {
     // Mount media stream
     console.log(videoStream);
     this.$refs.videoStream.srcObject = videoStream;
-    // this.$refs.videoStreamWide.srcObject = videoStream;
+    this.$refs.videoStreamWide.srcObject = videoStream;
   },
   methods: {
     capture() {
@@ -56,7 +56,9 @@ export default {
         .drawImage(this.$refs.videoStream, 0, 0, canvasWidth, canvasHeight);
 
       // TODO: Send Base64 img string to API endpoint
-      console.log(this.$refs.canvas.toDataURL("image/png"));
+      const image = this.$refs.canvas.toDataURL("image/png");
+      console.log(image);
+      this.$store.dispatch("checkFace", image);
 
       // TODO: If successful, get userInfo from an endpoint
 
@@ -72,7 +74,7 @@ canvas {
 }
 #videoStreamWide {
   /* filter: grayscale(100%); */
-  /* transform: scale(-1, 1); */
+  transform: scale(-1, 1);
 }
 #videoStream {
   filter: brightness(0%);
