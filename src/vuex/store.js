@@ -9,7 +9,6 @@ export default new Vuex.Store({
     loginStatus: "loggedOut",
     matchError: false,
     currentView: "loginPanel",
-    user_id: undefined,
     user_name: "",
     list_of_newsitems: []
   },
@@ -18,7 +17,7 @@ export default new Vuex.Store({
       state.user_id = id;
     },
     setUsername(state, name) {
-      state.name = name;
+      state.user_name = name;
     },
     changeView(state, view) {
       state.currentView = view;
@@ -41,12 +40,13 @@ export default new Vuex.Store({
     },
   },
   actions: {
-    async checkFace(store, image) {
+     checkFace(store, image) {
       try {
         // **************************** FAKE DATA *********************************
         const randomNumber = Math.floor(Math.random() * 10);
-        if (randomNumber < 3) {
-         const response = {
+        let response;
+        if (randomNumber < 4) {
+          response = {
            result: true,
            data: {
              name: 'Naoto',
@@ -211,7 +211,7 @@ export default new Vuex.Store({
            }
           }
         } else if (randomNumber < 7) {
-          const response = {
+          response = {
             result: true,
             data: {
               name: 'David',
@@ -346,25 +346,27 @@ export default new Vuex.Store({
             }
            }
         } else {
-          const response = {
+          response = {
             result: false
             }
           }
         // **************************** FAKE DATA *********************************
         // wait 3 seconds //
-        function wait(ms) {
+        const wait = (ms) => {
           var d = new Date();
           var d2 = null;
-          do { d2 = new Date(); }
+          do {
+            d2 = new Date();
+          }
           while(d2-d < ms);
         }
         wait(3000);
 
-        // const response= await axios.post("/api/facematchOrWhatEver"); 
-        if(response.result === true) {
+        // const response= await axios.post("/api/facematchOrWhatEver");
+        if (response.result === true) {
           store.commit("setUsername", response.data.name);
           store.commit("updateNewslist", response.data.value);
-          store.commit("setLogStatus", "loggedIn");
+          store.commit("setLoginStatus", "loggedIn");
           store.commit("setMatchError", false);
           store.commit("changeView", "resultsPanel");
         } else {
