@@ -4,7 +4,7 @@
       <v-app-bar app color="black" dark>
         <v-toolbar-title>
           <div @click="dummyLogin">
-            Smart Mirror App
+            <b>Smart Mirror App</b>
           </div>
         </v-toolbar-title>
 
