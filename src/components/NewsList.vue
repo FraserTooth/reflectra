@@ -1,6 +1,6 @@
 <template>
   <div id="newsList">
-    <div v-for="item in dummyNews" :key="item.url">
+    <div v-for="item in $store.state.list_of_newsitems" :key="item.url">
       <newsItem :news="item" class="mb-2" />
     </div>
   </div>
