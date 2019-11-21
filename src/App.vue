@@ -44,13 +44,8 @@ export default {
     username: "",
   }),
   methods: {
-    capture() {
-      this.$refs.canvas
-        .getContext("2d")
-        .drawImage(this.$refs.videoStream, 0, 0, 500, 600);
-      //  .then(sendPhoto(this.$refs.canvas.toDataURL("image/png")));
-      console.log(this.$refs.canvas.toDataURL("image/png"));
-      console.log(sendPhoto(this.$refs.canvas.toDataURL("image/png")));
+    dummyLogin() {
+      this.username = "TEST";
     },
   },
 };

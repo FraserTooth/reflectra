@@ -1533,11 +1533,14 @@ axios@^0.19.0:
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 axois@^0.0.1-security:
   version "0.0.1-security"
   resolved "https://registry.yarnpkg.com/axois/-/axois-0.0.1-security.tgz#372b4659c6a059ec4a6c6786f81fbf6cb5f892d2"
   integrity sha512-8Nui4fwwyxHfjAfpDlg3Jt66EJA4i1D1eJch3D+wM/Oe+qhpyp7yfiszko/O5/adYu20wc37RG9/Eg8QIJHcvA==
 
+=======
+>>>>>>> ae683e128352d0a1ad515c57946d554f91a3a37a
 =======
 >>>>>>> ae683e128352d0a1ad515c57946d554f91a3a37a
 =======
