@@ -119,5 +119,8 @@ canvas {
 }
 #videoStream {
   filter: brightness(0%);
+  position: fixed;
+  top: 0;
+  right: 0;
 }
 </style>

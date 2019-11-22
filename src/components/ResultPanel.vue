@@ -29,6 +29,9 @@
 
       <!-- The other components -->
       <v-col cols="3">
+        <v-card color="transparent" class="clock" outlined>
+          <clock />
+        </v-card>
         <!-- Weather -->
         <v-card color="transparent" outlined>
           <h1 class="background">
@@ -38,13 +41,28 @@
           </h1>
           <v-divider dark></v-divider>
         </v-card>
-        <v-card class="mx-auto card" color="transparent" outlined>
-          <!-- <h2>Dummy</h2>
+        <div>
+          <v-card class="mx-auto card" color="transparent" outlined>
+            <v-card-text class="white--text pb-0">
+              <v-row>
+                <div>test</div>
+              </v-row>
+              <v-row>
+                <div>
+                  test
+                </div>
+              </v-row>
+            </v-card-text>
+          </v-card>
+        </div>
+
+        <!-- <v-card class="mx-auto card" color="transparent" outlined> -->
+        <!-- <h2>Dummy</h2>
           <h2>Dummy</h2>
           <h2>Dummy</h2>
           <h2>Dummy</h2>
           <h2>Dummy</h2> -->
-        </v-card>
+        <!-- </v-card> -->
 
         <!-- Other contents -->
         <v-card color="transparent" outlined>
@@ -63,11 +81,13 @@
 
 <script>
 import NewsList from "./NewsList";
+import Clock from "./Clock";
 
 export default {
   name: "ResultPanel",
   components: {
     newsList: NewsList,
+    clock: Clock,
   },
   mounted: async function() {
     // Get mediaStream
@@ -106,10 +126,13 @@ h1 {
 }
 h2 {
   /* FIXME: For test */
-  color: transparent;
+  color: white;
 }
 .background {
   /* background-color: rgba(0, 0, 0, 0.5); */
   text-shadow: 0px 0px 10px black;
+}
+.clock {
+  margin: 100px;
 }
 </style>
