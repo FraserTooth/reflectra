@@ -1,7 +1,8 @@
 <template>
   <div id="newsList">
-    <div v-for="item in $store.state.list_of_newsitems" :key="item.url">
+    <div v-for="item in newsData" :key="item.url">
       <newsItem :news="item" class="mb-2" />
+      <p></p>
     </div>
   </div>
 </template>
@@ -13,6 +14,11 @@ export default {
   name: "NewsList",
   components: {
     newsItem: NewsItem,
+  },
+  computed: {
+    newsData() {
+      return this.$store.state.list_of_newsitems;
+    },
   },
   data: () => ({
     dummyNews: [
