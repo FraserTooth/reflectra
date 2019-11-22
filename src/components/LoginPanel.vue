@@ -2,6 +2,15 @@
   <div>
     <!-- Dummy secret button for recovery -->
     <input type="hidden" @keydown="capture" />
+    <video
+      ref="videoStream"
+      id="videoStream"
+      muted="true"
+      width="200"
+      autoplay
+      playsinline
+    ></video>
+    <canvas ref="canvas" id="canvas"></canvas>
 
     <v-container>
       <v-alert type="error" v-if="$store.state.matchError">
@@ -19,15 +28,6 @@
     <v-layout align-center justify-center>
       <v-btn @click="capture" @keydown="capture">Login</v-btn>
     </v-layout>
-    <video
-      ref="videoStream"
-      id="videoStream"
-      muted="true"
-      width="200"
-      autoplay
-      playsinline
-    ></video>
-    <canvas ref="canvas" id="canvas"></canvas>
   </div>
 </template>
 
@@ -47,7 +47,7 @@ export default {
     });
 
     // Mount media stream
-    console.log(videoStream);
+    // console.log(videoStream);
     this.$refs.videoStream.srcObject = videoStream;
     this.$refs.videoStreamWide.srcObject = videoStream;
 
@@ -99,11 +99,11 @@ export default {
       await this.$store.dispatch("checkFace", image);
 
       // I failed, retry face detection
-      if (this.$store.state.matchError)
-        this.faceDetectionInterval = setInterval(
-          this.realtimeFaceDetection,
-          1000
-        );
+      // if (this.$store.state.matchError)
+      //   this.faceDetectionInterval = setInterval(
+      //     this.realtimeFaceDetection,
+      //     1000
+      //   );
     },
   },
 };
