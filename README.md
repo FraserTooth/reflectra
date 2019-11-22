@@ -1,5 +1,16 @@
-# smart_mirror_app
+_This was created during our time as a student at [Code Chrysalis](https://www.codechrysalis.io/)._
+
+_This was the Team API Project, where a deployed MVP web application using APIs was to be built and presented in 4 days_
+
+_Therefore, please excuse the messy code, but I hope to continue working on this as part of my wider belief in allowing non-developers to contribute to development._
+
+
+# reflectra
 [![All Contributors](https://img.shields.io/badge/all_contributors-5-orange.svg?style=flat-square)](#contributors)
+
+##Check out our demo!
+[Demo Deployed on Heroku](https://reflectra.herokuapp.com/)
+_This demo will become non-functional soon as we will deactivate the paid API links_
 
 ## Project setup
 ```
@@ -27,15 +38,21 @@ Please add a file named ```.env``` to the root of your project.
 In order to run the project properly, please add the following to this file:
 ```bash
 RAPID_API_KEY=#Your Rakuten Rapid API Key
-DB_CONNECTION=#Your MongoDB Cloud Key
+DB_CONNECTION=#Your MongoDB Atlas Connection String
 ```
+Sign Up for a [MongoDB account](https://cloud.mongodb.com)
+
+When setting up Rakuten Rapid API, please sign up for:
+- [Kairos](https://english.api.rakuten.net/KairosAPI/api/kairos-face-recognition)
+- [Bing News](https://english.api.rakuten.net/microsoft-azure/api/bing-news-search)
+- [Dark Sky](https://english.api.rakuten.net/darkskyapis/api/dark-sky)
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
 
 ## Contributors ✨
 
-Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
+Our wonderful team: ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore -->
