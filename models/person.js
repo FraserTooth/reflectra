@@ -2,9 +2,7 @@ const mongoose = require("mongoose");
 
 const personSchema = mongoose.Schema({
   name: String,
-  preference: String,
-  lat: Number,
-  long: Number,
+  category: String,
 });
 
 module.exports = mongoose.model("Person", personSchema);
