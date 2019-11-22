@@ -7,10 +7,43 @@ const path = require("path");
 const bodyParser = require("body-parser");
 const fetch = require("node-fetch");
 const axios = require("axios");
-
 require("dotenv").config();
 
 const PORT = process.env.PORT || 9000;
+
+//connects to the person collection in our database
+let person = require('./models/person.js')
+
+//queries all data in the data base
+/* person.find({})
+ .then((data)=>{
+    console.log(data);
+  })
+ .catch((err)=>{
+   console.log(err);
+ }) */
+
+ //queries for specific data
+/* person.find({name:"eugene"})
+ .then((doc)=>{
+    console.log(doc);
+ })
+.catch((err)=>{
+    console.log(err);
+}); */
+
+/* person.remove({name: 'test'})
+    .then((docs)=>{
+      if(docs.deletedCount) {
+        console.log({"success":true});
+      } else {
+        console.log({"success":false});
+      }
+    }).catch((err)=>{
+      console.log(err);
+  })
+      */
+//console.log(process.env.DB_CONNECTION)
 
 // Setup Logger
 app.use(
@@ -22,8 +55,8 @@ app.use(
 // Serve static assets
 app.use(express.static(path.resolve(__dirname, ".", "dist")));
 
-app.use(bodyParser.json());
-// Connection URL
+app.use(bodyParser.json({ limit: "50mb" }));
+app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
 mongoose.connect(process.env.DB_CONNECTION, { useNewUrlParser: true }, () =>
   console.log("connected to db!")
 );
@@ -52,9 +85,7 @@ app.get("/api/:personId", async (req, res) => {
 app.post("/api/", async (req, res) => {
   const person = new Person({
     name: req.body.name,
-    preference: req.body.preference,
-    lat: req.body.lat,
-    long: req.body.long,
+    category: req.body.category,
   });
   try {
     const savedPerson = await person.save();
@@ -63,6 +94,17 @@ app.post("/api/", async (req, res) => {
     res.json({ err });
   }
 }); 
+
+//delete post
+app.delete("/api/", async (req, res) => {
+  try {
+    const person = await Person.findById(req.params.personId);
+    res.json(person);
+  } catch (err) {
+    res.json({ err });
+  }
+});
+
 
 const sendPhoto =  (base64) => {
   return axios({
@@ -98,10 +140,22 @@ const sendPhoto =  (base64) => {
   })
 };
 
-const getNews = (person) => {
-  let category = '';
+app.get("/test/", async (req, res) => {
+  try {
+    const person = await Person.find({name:"eugene"});
+    res.json(person[0].category);
+  } catch (err) {
+    res.json({ err });
+  }
+});
 
-  switch(person) {
+const getNews = async (person) => {
+
+const findPerson = await Person.find({name:person});
+let category = findPerson[0].category;
+console.log(category, "THIS IS THE CATEGORY")
+
+ /*  switch(person) {
     case "baru":
       category = "Sports"
       break;
@@ -125,7 +179,7 @@ const getNews = (person) => {
     default:
       category = "ScienceAndTechnology"
       break
-  }
+  } */
   
   return (axios({
     url: "https://microsoft-azure-bing-news-search-v1.p.rapidapi.com/?Category=" + category,
@@ -136,7 +190,7 @@ const getNews = (person) => {
     }
   })
   .then((response) => {
-    //console.log(response.data)
+    console.log(response.data)
     return response.data
     })
   .catch(err => {
@@ -161,6 +215,7 @@ app.post('/api/data', async (req,res) =>{
     res.send(totalResponse)
 })
 
+console.log(getNews("eugene"))
 // Always return the main index.html, since we are developing a single page application
 app.get("*", (req, res) => {
   res.sendFile(path.resolve(__dirname, ".", "dist", "index.html"));
