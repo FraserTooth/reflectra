@@ -11,7 +11,7 @@
         <v-spacer></v-spacer>
 
         <span class="mr-4" v-if="$store.state.user_name !== ''"
-          >Wellcome, <b>{{ $store.state.user_name }}</b></span
+          >Welcome, <b>{{ $store.state.user_name | nameFilter }}</b></span
         >
 
         <v-btn v-if="$store.state.currentView === 'resultsPanel'" text>
@@ -53,6 +53,13 @@ export default {
   data: () => ({
     loginStatus: false,
   }),
+
+  filters: {
+    nameFilter: (name) => {
+      return name.toUpperCase();
+    },
+  },
+
   methods: {
     login() {
       // this.loginStatus = true;

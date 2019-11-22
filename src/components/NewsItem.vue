@@ -7,7 +7,7 @@
         </v-row>
         <v-row>
           <div>
-            {{ news.provider[0]["0"].name }}
+            {{ news.provider[0].name }}
           </div>
         </v-row>
 
