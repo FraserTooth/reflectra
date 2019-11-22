@@ -1,5 +1,13 @@
 <template>
   <div>
+    <!-- Dummy secret button for recovery -->
+    <input type="hidden" @keydown="capture" />
+
+    <v-container>
+      <v-alert type="error" v-if="$store.state.matchError">
+        ERROR!! Your face does not register...
+      </v-alert>
+    </v-container>
     <video
       ref="videoStreamWide"
       id="videoStreamWide"
@@ -9,13 +17,13 @@
       playsinline
     ></video>
     <v-layout align-center justify-center>
-      <v-btn @click="capture">Login</v-btn>
+      <v-btn @click="capture" @keydown="capture">Login</v-btn>
     </v-layout>
     <video
       ref="videoStream"
       id="videoStream"
       muted="true"
-      width="250"
+      width="200"
       autoplay
       playsinline
     ></video>
@@ -24,8 +32,13 @@
 </template>
 
 <script>
+import * as faceapi from "face-api.js";
+
 export default {
   name: "LoginPanel",
+  data: () => ({
+    faceDetectionInterval: undefined,
+  }),
   mounted: async function() {
     // Get mediaStream
     const videoStream = await navigator.mediaDevices.getUserMedia({
@@ -37,9 +50,34 @@ export default {
     console.log(videoStream);
     this.$refs.videoStream.srcObject = videoStream;
     this.$refs.videoStreamWide.srcObject = videoStream;
+
+    await faceapi.nets.tinyFaceDetector.loadFromUri("/models");
+    await faceapi.nets.faceLandmark68Net.loadFromUri("/models");
+
+    this.faceDetectionInterval = setInterval(this.realtimeFaceDetection, 1000);
   },
+
   methods: {
-    capture() {
+    async realtimeFaceDetection() {
+      // The array of detected face
+      const detections = await faceapi
+        .detectAllFaces(
+          this.$refs.videoStreamWide,
+          new faceapi.TinyFaceDetectorOptions()
+        )
+        .withFaceLandmarks();
+
+      if (detections.length > 0 && this.faceDetectionInterval !== undefined) {
+        console.log("Face detected!!");
+        clearInterval(this.faceDetectionInterval);
+        this.faceDetectionInterval = undefined;
+        this.capture();
+      } else {
+        console.log("Not detected...");
+      }
+    },
+
+    async capture() {
       const canvasWidth = this.$refs.videoStream.width;
       const canvasHeight =
         this.$refs.videoStream.videoHeight *
@@ -55,14 +93,17 @@ export default {
         .getContext("2d")
         .drawImage(this.$refs.videoStream, 0, 0, canvasWidth, canvasHeight);
 
-      // TODO: Send Base64 img string to API endpoint
+      // Send Base64 img string to API endpoint
       const image = this.$refs.canvas.toDataURL("image/png");
       console.log(image);
-      this.$store.dispatch("checkFace", image);
+      await this.$store.dispatch("checkFace", image);
 
-      // TODO: If successful, get userInfo from an endpoint
-
-      // TODO: I failed, show error message
+      // I failed, retry face detection
+      if (this.$store.state.matchError)
+        this.faceDetectionInterval = setInterval(
+          this.realtimeFaceDetection,
+          1000
+        );
     },
   },
 };

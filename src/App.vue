@@ -10,6 +10,10 @@
 
         <v-spacer></v-spacer>
 
+        <span class="mr-4" v-if="$store.state.user_name !== ''"
+          >Wellcome, <b>{{ $store.state.user_name }}</b></span
+        >
+
         <v-btn v-if="$store.state.currentView === 'resultsPanel'" text>
           <span class="mr-2">Settings</span>
           <v-icon>fas fa-cog</v-icon>
@@ -28,12 +32,6 @@
         <transition name="fade">
           <loginPanel v-if="$store.state.currentView === 'loginPanel'" />
           <resultPanel v-if="$store.state.currentView === 'resultsPanel'" />
-          <!-- TODO: Error Massage -->
-          <v-container>
-            <v-alert type="error" v-if="$store.state.matchError">
-              ERROR!! Your face does not register...
-            </v-alert>
-          </v-container>
         </transition>
       </v-content>
     </v-app>
@@ -59,10 +57,12 @@ export default {
     login() {
       // this.loginStatus = true;
       this.$store.commit("changeView", "resultsPanel");
+      this.$store.commit("setUsername", "TEST USER");
     },
     logout() {
       // this.loginStatus = false;
       this.$store.commit("changeView", "loginPanel");
+      this.$store.commit("setUsername", "");
     },
   },
 };
