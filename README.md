@@ -2,15 +2,31 @@ _This was created during our time as a student at [Code Chrysalis](https://www.c
 
 _This was the Team API Project, where a deployed MVP web application using APIs was to be built and presented in 4 days_
 
-_Therefore, please excuse the messy code, but I hope to continue working on this as part of my wider belief in allowing non-developers to contribute to development._
-
-
 # reflectra
 [![All Contributors](https://img.shields.io/badge/all_contributors-5-orange.svg?style=flat-square)](#contributors)
 
-##Check out our demo!
+Reflectra is an app designed to go on a Smart Mirror.
+
+![alt text](/misc/naotoLoginSmall.png "App Screenshot Example")
+
+At first, it presents no information, but is continually using a camera (e.g. the webcam on a laptop) to check for the presence of a face, using `face-api.js`
+
+Once it sees a face, it takes a snapshopt and sends a scaled down version of the picture to the `Node.js` backend server 
+
+The backend server will send this photo to the [Kairos](https://english.api.rakuten.net/KairosAPI/api/kairos-face-recognition) api, which will tell the backend whether the face matches a person in the database, and who it is.
+
+Now knowing who the person is, the backend server will then request information from `MongoDB Atlas` about that user's preferences (such as what kind of headlines they would like to see).
+
+Using these preferences, the backend server will make requests to other content apis (such as `Bing News`) to fetch the desired content. Which will then be sent to the frontend.
+
+This data is then displayed to the user on the screen.
+
+## Public Presentation
+Check out our public presentation of this app to see it in action! [https://youtu.be/F3mqIgY2uUk?t=4172](https://youtu.be/F3mqIgY2uUk?t=4172)
+
+## Check out our demo!
 [Demo Deployed on Heroku](https://reflectra.herokuapp.com/)
-_This demo will become non-functional soon as we will deactivate the paid API links_
+_This demo is now offline due to the paid API requirements_
 
 ## Project setup
 ```
