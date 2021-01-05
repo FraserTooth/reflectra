@@ -13,7 +13,7 @@
     "@tensorflow/tfjs-node": "1.2.9",
     "@vue/cli-plugin-babel": "^4.0.0",
     "@vue/cli-service": "^4.0.0",
-    "axios": "^0.19.0",
+    "axios": "^0.21.1",
     "body-parser": "^1.19.0",
     "canvas": "^2.6.0",
     "core-js": "^3.3.2",
