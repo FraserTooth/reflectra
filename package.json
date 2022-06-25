@@ -23,7 +23,7 @@
     "mongodb": "^3.3.4",
     "mongoose": "^5.7.12",
     "morgan": "^1.9.1",
-    "node-fetch": "^2.6.0",
+    "node-fetch": "^2.6.7",
     "sass": "^1.19.0",
     "sass-loader": "^8.0.0",
     "vue": "^2.6.10",
